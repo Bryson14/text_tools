@@ -15,18 +15,24 @@ functions = ["cat", "tac", "cut", "paste", "grep", "head", "tail", "sort", "uniq
 
 if __name__ == "__main__":
 
-
+    # too little arguments
     if len(sys.argv) < 2:
         usage("Not enough arguments given")
         sys.exit(1)
 
-    elif str(sys.argv[2]).lower() in functions:
+    # no files were given to an attempted function
+    elif len(sys.argv) == 2:
+        usage(None, str(sys.argv[1]).lower())
+        sys.exit(1)
+
+    # initializes the correct function
+    elif str(sys.argv[1]).lower() in functions:
         args = []
         for arg in sys.argv:
             args.append(arg)
-        print("args", args)
+        args = args[2:]
 
-        func = str(sys.argv[2]).lower()
+        func = str(sys.argv[1]).lower()
 
         # calls the correct function
         if func == "cat":
@@ -49,9 +55,11 @@ if __name__ == "__main__":
             uniq(args)
         else:
             wc(args)
+
+    # unidentified function call
     else:
         usage("Function is not an identified call")
-        exit(1)
+        sys.exit(1)
 
 
 
