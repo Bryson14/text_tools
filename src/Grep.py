@@ -28,7 +28,7 @@ def include(files: list, iden: str):
             usage("\n    Given file not found.", "grep")
 
 
-def exclude(files: list, iden:str):
+def exclude(files: list, iden: str):
     print("")
     for file in files:
         try:
