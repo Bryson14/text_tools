@@ -1,3 +1,19 @@
+from Usage import usage
+
+
 def grep(args):
-    """print lines of files matching a pattern"""
+
+    if args[0] == '-v':
+        exclude(args[1:])
+    else:
+        include(args)
+
+
+def include(args):
+    print("")
+    pass
+
+
+def exclude(args):
+    print("")
     pass

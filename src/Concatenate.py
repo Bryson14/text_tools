@@ -1,3 +1,6 @@
+from Usage import usage
+
+
 def cat(args):
     print("")
     try:
@@ -7,7 +10,7 @@ def cat(args):
                 for line in data:
                         print(line[:-1 or None])
     except FileNotFoundError:
-        print("Given file not found.")
+        usage("\n    Given file not found.", "cat")
 
 
 def tac(args):
@@ -20,5 +23,5 @@ def tac(args):
                     line = data[i]
                     print(line[:-1 or None])
     except FileNotFoundError:
-        print("Given file not found.")
+        usage("\n    Given file not found.", "tac")
 
