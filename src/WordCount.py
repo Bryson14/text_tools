@@ -16,8 +16,6 @@ def wc(files: list):
 
             my_data.replace(",", "\n")
             my_data.replace(" ", "\n")
-            for thing in my_data.split("\n"):
-                print("i:", thing)
             words = len(my_data.split("\n"))
 
             file_status(file, lines, words, byts)
