@@ -1,3 +1,6 @@
+from Usage import usage
+
+
 def wc(files: list):
     print("")
     try:
@@ -18,17 +21,26 @@ def wc(files: list):
 
             # word count
             # removes \n from each line because that's not useful
-            for i in range(len(my_lines)):
-                my_lines[i] = my_lines[i][:-1]
-
+            data = my_data.split("\n")
             word_sep = [",", ";", ":", " ", "."]
 
-            for l in my_lines:
-                words += 1
-                for char in l:
-                    if char in word_sep:
-                        words += 1
-                print(words)
+            wordlist = []
+            i = 0
+            for line in data:
+                wordlist.append("")
+                for char in line:
+                    if char not in word_sep:
+                        wordlist[i] = wordlist[i] + char
+                    else:
+                        i += 1
+                        wordlist.append("")
+                i += 1
+
+            # removes that "" that are left over. Its easier to do this
+            while "" in wordlist:
+                wordlist.remove("")
+
+            words = len(wordlist)
 
             file_status(file, lines, words, byts)
 
@@ -38,3 +50,4 @@ def wc(files: list):
 
 def file_status(file_name: str, lines: int, words: int, byts: int):
     print(lines, "   ", words, "   ", byts, "   ", file_name)
+
