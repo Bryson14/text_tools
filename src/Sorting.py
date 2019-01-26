@@ -29,8 +29,7 @@ def uniq(args):
 
 # prints every line only once despite duplicates
     else:
-        files = args[1:]
-        for file in files:
+        for file in args:
             once = only_once(file)
             for o in once:
                 print(o)
@@ -108,10 +107,32 @@ def only_once(file) -> list:
 
     return once_lst
 
+
 def word_list(file) -> list:
     try:
         with open(file) as data:
             data = data.read()
-        data.split(" ")
+
+        data = data.split("\n")
+        word_sep = [",", ";", ":", " ", "."]
+
+        wordlist = []
+        i = 0
+        for line in data:
+            wordlist.append("")
+            for char in line:
+                if char not in word_sep:
+                    wordlist[i] = wordlist[i] + char
+                else:
+                    i += 1
+                    wordlist.append("")
+            i += 1
+
+        # removes that "" that are left over. Its easier to do this
+        while "" in wordlist:
+            wordlist.remove("")
+
+        return wordlist
+
     except FileNotFoundError:
         usage("File not found", "sort")
