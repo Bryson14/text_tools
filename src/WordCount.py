@@ -9,14 +9,26 @@ def wc(files: list):
             with open(file) as data:
                 my_lines = data.readlines()
 
+            # line count
             lines = len(my_lines)
 
+            # byte count
             for c in my_data:
                 byts += 1
 
-            my_data.replace(",", "\n")
-            my_data.replace(" ", "\n")
-            words = len(my_data.split("\n"))
+            # word count
+            # removes \n from each line because that's not useful
+            for i in range(len(my_lines)):
+                my_lines[i] = my_lines[i][:-1]
+
+            word_sep = [",", ";", ":", " ", "."]
+
+            for l in my_lines:
+                words += 1
+                for char in l:
+                    if char in word_sep:
+                        words += 1
+                print(words)
 
             file_status(file, lines, words, byts)
 
