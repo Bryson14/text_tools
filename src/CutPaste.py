@@ -6,17 +6,30 @@ def cut(args):
 
     if args[0] == "-f":
 
-        # takes in one or multiple column args
+        # takes in one or multiple column args.
         iden = str(args[1])
-        if "," in iden:
-            iden.split(",")
+
+        iden = iden.split(",")
+        for i in range(len(iden)):
+            iden[i] = int(iden[i])
+        print(iden)
+
+        # print multiple specific columns
+        if len(iden) > 1:
+            print_cut(args[2], iden)
+
+
+        # print one specific column
         else:
-            iden = int(iden)
+            print("only one column")
+            print_cut(args[2], iden[0])
+
 
     else:
-        print_cut(args[0])
+        print_cut(args[0], 0)
 
-def print_cut(file):
+
+def print_cut(file, column: list):
     try:
         with open(file) as data:
             lines = data.readlines()
@@ -29,8 +42,20 @@ def print_cut(file):
         for i in range(len(lines)):
             lines[i] = lines[i].split(",")
 
-        for line in lines:
-            print(line[0])
+        # prints one column
+        if not isinstance(column, list):
+            for line in lines:
+                print(line[column])
+
+        # prints multiple columns
+        else:
+            for line in lines:
+                for i in range(len(column)):
+                    print(line[column[i]], end="")
+                    if i < len(column) - 1:
+                        print(", ", end="")
+                print("")
+
 
     except FileNotFoundError:
         usage("File not found", "cut")
