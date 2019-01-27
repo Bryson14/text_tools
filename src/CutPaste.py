@@ -18,18 +18,16 @@ def cut(args):
         if len(iden) > 1:
             print_cut(args[2], iden)
 
-
         # print one specific column
         else:
             print("only one column")
             print_cut(args[2], iden[0])
 
-
     else:
         print_cut(args[0], 0)
 
 
-def print_cut(file, column: list):
+def print_cut(file, column):
     try:
         with open(file) as data:
             lines = data.readlines()
@@ -56,7 +54,6 @@ def print_cut(file, column: list):
                         print(", ", end="")
                 print("")
 
-
     except FileNotFoundError:
         usage("File not found", "cut")
 
@@ -64,5 +61,32 @@ def print_cut(file, column: list):
 def paste(args):
     """merge lines of files"""
 
+    data = []
+    for file in args:
+        try:
+            with open(file) as stuff:
+                lines = stuff.readlines()
 
+            # remove \n left over from .readlines()
+            for i in range(len(lines)):
+                lines[i] = lines[i][:-1]
 
+            data.append(lines)
+
+        except FileNotFoundError:
+            usage("File not found.", "paste")
+
+    # find the longest file
+    max = 0
+    for cell in data:
+        if len(cell) > max:
+            max = len(cell)
+
+    # prints the file in the correct csv format
+    for i in range(max):
+        for j in range(len(data)):
+            if i < len(data[j]):
+                print(data[j][i], end="")
+            if j < len(data) - 1:
+                print(",", end="")
+        print("")
