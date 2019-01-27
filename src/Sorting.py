@@ -3,7 +3,21 @@ from Usage import usage
 
 def sort(args):
     """sort lines of text files"""
-    pass
+    for file in args:
+        try:
+            with open(file) as data:
+                lines = data.readlines()
+
+            # remove \n left over from .readlines()
+            for i in range(len(lines)):
+                lines[i] = lines[i][:-1]
+
+            print("lines unsorted: ", lines)
+            print("sorted: ", sorted(lines))
+
+        except FileNotFoundError:
+            usage("File not found", "sort")
+
 
 
 def uniq(args):
@@ -31,8 +45,9 @@ def uniq(args):
     else:
         for file in args:
             once = only_once(file)
-            for o in once:
-                print(o)
+            for word in once:
+                print(word)
+
 
 
 def omit_copies(file):
@@ -128,7 +143,7 @@ def word_list(file) -> list:
                     wordlist.append("")
             i += 1
 
-        # removes that "" that are left over. Its easier to do this
+        # removes that "" that are left over. Its easier to do this than something else haha
         while "" in wordlist:
             wordlist.remove("")
 
