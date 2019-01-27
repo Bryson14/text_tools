@@ -3,6 +3,7 @@ from Usage import usage
 
 def wc(files: list):
     print("")
+    file_status("file name", "lines", "words", "bytes")
     try:
         for file in files:
             lines = words = byts = 0
@@ -49,5 +50,5 @@ def wc(files: list):
 
 
 def file_status(file_name: str, lines: int, words: int, byts: int):
-    print(lines, "   ", words, "   ", byts, "   ", file_name)
+    print('{:6}'.format(lines), '{:6}'.format(words), '{:6}'.format(byts), '{:>20}'.format(file_name))
 
