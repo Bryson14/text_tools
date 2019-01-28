@@ -6,7 +6,7 @@ def wc(files: list):
     file_status("file name", "lines", "words", "bytes")
     try:
         for file in files:
-            lines = words = byts = 0
+            lines = words_real = byts = words_linux = 0
 
             with open(file) as data:
                 my_data = data.read()
@@ -20,13 +20,17 @@ def wc(files: list):
             for c in my_data:
                 byts += 1
 
-            # word count
+            # word count by linux conventions for assn 2
+            for line in my_lines:
+                words_linux += len(line.split(" "))
+
+            # word count real not dumb linux conventions.
             # removes \n from each line because that's not useful
             data = my_data.split("\n")
             word_sep = [",", ";", ":", " ", "."]
 
             wordlist = []
-            # a line of code
+
             i = 0
             for line in data:
                 wordlist.append("")
@@ -42,9 +46,9 @@ def wc(files: list):
             while "" in wordlist:
                 wordlist.remove("")
 
-            words = len(wordlist)
+            words_real = len(wordlist)
 
-            file_status(file, lines, words, byts)
+            file_status(file, lines, words_linux, byts)
 
     except FileNotFoundError:
         usage("\n    Given file not found.", "wc")
