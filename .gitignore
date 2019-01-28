@@ -1,3 +1,4 @@
 # Python cruft
 *.pyc
 src/__pycache__/
+.idea
