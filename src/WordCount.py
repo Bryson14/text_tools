@@ -26,6 +26,7 @@ def wc(files: list):
             word_sep = [",", ";", ":", " ", "."]
 
             wordlist = []
+            # a line of code
             i = 0
             for line in data:
                 wordlist.append("")
