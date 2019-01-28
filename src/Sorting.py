@@ -12,8 +12,8 @@ def sort(args):
             for i in range(len(lines)):
                 lines[i] = lines[i][:-1]
 
-            print("lines unsorted: ", lines)
-            print("sorted: ", sorted(lines))
+            for i in sorted(lines):
+                print(i)
 
         except FileNotFoundError:
             usage("File not found", "sort")
@@ -47,7 +47,6 @@ def uniq(args):
             once = only_once(file)
             for word in once:
                 print(word)
-
 
 
 def omit_copies(file):
@@ -107,7 +106,7 @@ def only_once(file) -> list:
     lst = word_list(file)
     once_lst = []
     for i in range(len(lst)):
-        j = i -1
+        j = i - 1
 
         # beginning of list
         if j < 0:
