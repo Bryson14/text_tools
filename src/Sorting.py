@@ -53,17 +53,19 @@ def omit_copies(file):
     lst = word_list(file)
     for i in range(len(lst)):
         j = i + 1
+        dup = False
 
-        # end of list
-        if j > len(lst):
-            if lst[i] != list[j -2]:
-                print(lst[i])
+        # forward check
+        if i < len(lst) - 1 and not dup :
+            if lst[i] == lst[j]:
+                dup = True
 
-        # does not print line i
-        elif lst[i] == lst[j]:
-            pass
+        # backwards check
+        if i > 0 and not dup:
+            if lst[i] == lst[j - 2]:
+                dup = True
 
-        else:
+        if not dup:
             print(lst[i])
 
 
@@ -71,20 +73,18 @@ def omit_uniq(file):
     lst = word_list(file)
     for i in range(len(lst)):
         j = i + 1
+        printed = False
 
-        # end of list
-        if j >= len(lst):
-            if lst[i] != lst[j - 2]:
+        # forward check
+        if i < len(lst) - 1 and not printed:
+            if lst[i] == lst[j]:
                 print(lst[i])
-
-        # print line i with dup
-        elif lst[i] == lst[j]:
-            print(lst[i])
 
         # backwards check
-        elif i > 0:
-            if lst[i] == lst[j -2]:
+        if i > 0 and not printed:
+            if lst[i] == lst[j - 2]:
                 print(lst[i])
+
         else:
             pass
 
@@ -99,7 +99,7 @@ def count(file):
         occur.append(word_lst.count(unq))
 
     for i in range(len(occur)):
-        print(occur[i], " : ", word_lst[i])
+        print(occur[i], " : ", uniqs[i])
 
 
 def only_once(file) -> list:
