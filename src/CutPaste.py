@@ -10,9 +10,11 @@ def cut(args):
         iden = str(args[1])
 
         iden = iden.split(",")
-        for i in range(len(iden)):
-            iden[i] = int(iden[i])
-        print(iden)
+        try:
+            for i in range(len(iden)):
+                iden[i] = int(iden[i])
+        except ValueError:
+            usage("Indexes must be positive integers.", "cut")
 
         # print multiple specific columns
         if len(iden) > 1:
@@ -20,7 +22,6 @@ def cut(args):
 
         # print one specific column
         else:
-            print("only one column")
             print_cut(args[2], iden[0])
 
     else:
@@ -42,8 +43,11 @@ def print_cut(file, column):
 
         # prints one column
         if not isinstance(column, list):
-            for line in lines:
-                print(line[column])
+            try:
+                for line in lines:
+                    print(line[column])
+            except IndexError:
+                usage("The index you attempted doesn't exist in this file.", "cut")
 
         # prints multiple columns
         else:
