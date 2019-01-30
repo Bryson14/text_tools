@@ -62,13 +62,9 @@ def tail(args):
                 for i in range(len(data)):
                     data[i] = data[i][:-1]
 
-                j = 0
-                for i in reversed(range(len(data))):
-                    if j >= size:
-                        pass
-                    else:
-                        print(data[i])
-                        j += 1
+                data = data[-size:]
+                for i in data:
+                    print(i)
 
             except FileNotFoundError:
                 print("The file given was not located.")
@@ -87,13 +83,9 @@ def tail(args):
                 for i in range(len(data)):
                     data[i] = data[i][:-1]
 
-                j = 0
-                for i in reversed(range(len(data))):
-                    if j >= 10:
-                        pass
-                    else:
-                        print(data[i])
-                        j += 1
+                data[-10:]
+                for i in data:
+                    print(i)
 
             except FileNotFoundError:
                 print("The file given was not located.")
